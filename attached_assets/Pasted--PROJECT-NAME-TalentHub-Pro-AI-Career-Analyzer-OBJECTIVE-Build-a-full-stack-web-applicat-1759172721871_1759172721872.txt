@@ -1,0 +1,57 @@
+**PROJECT NAME:** TalentHub Pro (AI Career Analyzer)
+
+**OBJECTIVE:** Build a full-stack web application that uses a backend AI service (Gemini API) to analyze a candidate's resume against a job description. The application must display the analysis in a rich, interactive front-end dashboard.
+
+**TECH STACK:**
+* **Backend/API:** Node.js (Express.js) for the REST API and to host the static frontend files.
+* **Frontend/UI:** React (Vite/create-react-app) for a Single Page Application (SPA) with a modern design (use **Tailwind CSS** or a popular component library like **MUI**).
+* **AI Integration:** Use a server-side SDK (Node.js) to connect to the Gemini API.
+* **Data Structure:** The backend API must return the entire analysis as a single JSON object.
+
+**CORE APPLICATION FLOW:**
+
+1.  **Input Screen (Frontend):** A form with two large, multi-line text areas: one for **RESUME TEXT** and one for **JOB DESCRIPTION TEXT**.
+2.  **API Call:** A user button click sends the two text strings to the backend endpoint: `/api/analyze-resume`.
+3.  **Backend Processing:** The Node.js server takes the two strings and inserts them into a **single, detailed Gemini prompt** (like the one previously discussed). It calls the Gemini API to get the structured JSON analysis.
+4.  **Results Dashboard (Frontend):** The front-end receives the JSON and renders it into the following distinct visualization sections.
+
+**REQUIRED FRONTEND COMPONENTS & VISUALIZATIONS:**
+
+* **Match Summary:** Display **Match Score** (large percentage circle), **Fit Justification**, and **Cultural Vibe**.
+* **Career Roadmap Generator:** Use a simple JavaScript library (like **Vis.js** or a mock component) to visualize the data from the `career_roadmap.nodes` and `career_roadmap.edges` JSON fields as a **graph/flowchart**.
+* **Smart Recommendations:** A card-based list showing **Missing Skills** with the **Free/Paid Course links** and **Time-to-Mastery** projections.
+* **Job Market Demand Heatmap:** A simple bar chart or grid visualizing the `market_demand_scores` (1-10) to show relative demand for key skills.
+* **Export Feature:** A button/link on the results page to simulate **Export to PDF/CSV**. (Just include a placeholder function for now).
+
+**Initial Step:**
+**Scaffold the entire full-stack project (Node/Express backend, React/Tailwind frontend) and create the basic UI structure with the input form and a placeholder for the results dashboard.** Do not implement the Gemini API integration in the first step.
+2. Staged Development Prompts (For Iteration)
+Once the Replit Agent has set up the initial file structure, you will use these prompts sequentially in the Replit Agent chat to build the rest of the application.
+
+Stage 1: Backend API Logic
+(Use this prompt after the initial scaffold is complete)
+
+The project is set up. Now, let's create the core backend logic. In the Express server's main file, create a POST endpoint at `/api/analyze-resume`. This endpoint must accept a JSON body containing `resumeText` and `jobDescriptionText`. It should use the Node.js Gemini SDK to call the model with the following comprehensive prompt and JSON schema. Log the final JSON response to the console.
+
+**[Paste the FULL, detailed Gemini prompt and JSON schema from the previous response here, using proper escaping for the code block if necessary.]**
+
+The endpoint should return the raw JSON object from the Gemini API call as its response.
+Stage 2: Frontend Data Submission
+(Use this prompt after Stage 1 is verified)
+
+Now, connect the frontend. In the main React component (`App.js` or `Home.js`):
+1.  Implement a state variable to store the JSON response from the API.
+2.  Update the submit button on the input form to use an `async` function.
+3.  On submission, it must make a POST request to the `/api/analyze-resume` endpoint, sending the collected `resumeText` and `jobDescriptionText` from the form fields.
+4.  Store the successful JSON response in the state and log it to the console. For now, hide the input form and display the raw JSON object on the screen to confirm the connection works.
+Stage 3: Results Dashboard Visualization
+(Use this prompt after Stage 2 is verified and you have a successful JSON response in the frontend state)
+
+The frontend is receiving the complete JSON analysis. Now, develop the results dashboard. Create a new React component called `ResultsDashboard.js` to replace the raw JSON display.
+
+Inside `ResultsDashboard.js`, use the data in the state to build and render the following sections with clear, modern Tailwind CSS styling:
+
+1.  **Match Summary:** Display the `match_score_percentage` in a large, bold font, and render the `fit_justification` and `cultural_vibe`.
+2.  **Core Recommendations Card:** Display the `top_3_missing_skills` and `trending_skills` in simple, styled list groups.
+3.  **Data Visualization Mockup:** Create a component that iterates over the `market_demand_scores` object to display each skill and its score (1-10) as a simple colored horizontal bar to visualize the "Heatmap" data.
+B
